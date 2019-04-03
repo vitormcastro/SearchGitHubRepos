@@ -9,10 +9,27 @@
     </head>
     <body>
         <div id="app" class="container">
-        </br>
-            <input v-model="message">
-            <button class="btn btn-primary" v-on:click="buscaGitAccount">Pesquisar</button>
-            <p>{{ info }}</p>
+            </br>
+            Busque uma Conta GITHUB </br>
+            <div class="input-group mb-3">
+                <input v-model="login" type="text" class="form-control" placeholder="Login do GitHub" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button v-on:click="buscaGitAccount" class="btn btn-outline-secondary" type="button">Pesquisar</button>
+                </div>
+            </div>
+            </br>
+            <div v-if="show" class="row">
+                <div class="col-4">
+                    <img v-bind:src="avatarUrl" width="150" height="180">
+                </div>
+                <div class="col-sm">
+                   Nome: <a v-bind:href="perfilUrl">{{ nome }}</a>  </br>
+                   {{ bio }}
+                </div>
+            </div>
+            <div v-if="falha" class="alert alert-danger" role="alert">
+                Error: {{ messageFalha }}
+            </div>        
         </div>
         <script src="src/index.js"></script>
     </body>
