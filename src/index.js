@@ -11,7 +11,8 @@ var app = new Vue({
             login: '',
             show: false,
             falha: false,
-            messageFalha: null
+            messageFalha: null,
+            repos: null
         }
     },
     methods: {
@@ -30,6 +31,16 @@ var app = new Vue({
                 this.falha = false;
                 this.perfilUrl = Response.data.html_url;
             })
+            .then(axios.get('https://api.github.com/users/'+app.login+'/repos')
+            .then(Response =>{
+                this.repos = Response.data;            
+            })
+            .catch(error => {
+                console.log(error);
+                this.show = false;
+                this.falha = true;
+                this.messageFalha = error.response.data.message;
+            }))
             .catch(error => {
                 console.log(error);
                 this.show = false;

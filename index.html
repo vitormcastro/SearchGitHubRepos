@@ -27,6 +27,16 @@
                    {{ bio }}
                 </div>
             </div>
+            </br>
+            <p v-if="show">Lista de Repositórios</p>
+            <div v-if="show" class="row">
+                
+                <ol>
+                    <li v-for="r in repos">
+                        {{ r.name }}
+                    </li>
+                </ol>
+            </div>
             <div v-if="falha" class="alert alert-danger" role="alert">
                 Error: {{ messageFalha }}
             </div>        
